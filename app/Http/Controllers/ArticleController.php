@@ -41,8 +41,9 @@ class ArticleController extends Controller
 
     public function storeFilter()
     {
+        $articles = Article::whereNull('published_at')->get();
 
-        return view('publ_news', ['news' => Article::whereNull('published_at')->get()]);
+        return view('publ_news', ['news' => $articles]);
     }
 
     public function update()
@@ -55,7 +56,8 @@ class ArticleController extends Controller
     public function destroyFilter()
     {
         $articles = Article::all();
-        return view('destroy_news', ['articles' => Article::all()]);
+
+        return view('destroy_news', ['articles' => $articles]);
     }
 
     public function destroy($id)
