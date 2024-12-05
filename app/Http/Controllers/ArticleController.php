@@ -62,7 +62,6 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        dd($id);
         DB::beginTransaction();
         try {
             Article::findOrFail($id)->delete();
@@ -70,6 +69,7 @@ class ArticleController extends Controller
             return view('destroy_news_ok');
         } catch (\Exception $exception) {
             DB::rollBack();
+            echo $exception->getMessage();
         }
     }
 

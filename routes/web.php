@@ -25,6 +25,8 @@ Route::get('/destroy_news/{id}', [ArticleController::class, 'destroy']);
 Route::get('/destroy_news', [ArticleController::class, 'destroyFilter']);
 
 Route::get('/category', [CategoryController::class, 'show']);
+Route::get('/category_deleted', [CategoryController::class, 'destroyFilter']);
+Route::get('/category_deleted/{id}', [CategoryController::class, 'destroy']);
 
 Route::get('/publ_news', [ArticleController::class, 'storeFilter']);
 Route::get('/publ_news/{id}', [ArticleController::class, 'store']);

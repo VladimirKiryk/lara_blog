@@ -14,31 +14,43 @@ class CategoryController extends Controller
 
     public function show()
     {
-        return view('category');
+        $categories = Category::all();
+        return view('category', ['categories' => $categories]);
     }
 
     public function store()
     {
     }
 
-    public function update()
+    public function destroyFilter()
     {
+        $categories = Category::all();
+        return view('category_deleted', ['categories' => $categories]);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        Category::destroy(request()->id);
+        DB::beginTransaction();
+        try {
+            Category::findOrFail($id)->delete();
+            DB::commit();
+            return view('category_deleted_ok');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+        }
     }
+
 
     public function checkCategory(CheckCategoryRequest $request)
     {
+        $categories = Category::all();
         DB::beginTransaction();
         try {
             $category = new Category();
             $category->category_title = $request->input('category_title');
             $category->save();
             DB::commit();
-            return view('home');
+            return view('category', ['categories' => $categories]);
 
         } catch (\Exception $exception) {
             DB::rollBack();
