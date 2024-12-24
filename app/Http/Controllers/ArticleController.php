@@ -7,11 +7,13 @@ use App\Http\Requests\CheckNewsRequest;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class ArticleController extends Controller
 {
+
     public function indexFilter()
     {
         $categories = Category::all();
@@ -21,8 +23,10 @@ class ArticleController extends Controller
     public function index($id)
     {
         $categories = Category::all();
-        $articles = Article::where('category_id', $id)->get();
-        return view('show_news_category', ['articles' => $articles, 'categories' => $categories]);
+        $user = User::all();
+        $articles = Article::where('category_id', $id)->whereNotNull('published_at')->get();
+
+        return view('show_news_category', ['articles' => $articles, 'categories' => $categories, 'user' => $user]);
     }
 
     public function store($id)
@@ -76,6 +80,7 @@ class ArticleController extends Controller
 
     public function checkNews(CheckNewsRequest $request)
     {
+        $user = Auth::user();
 
         DB::beginTransaction();
         try {
@@ -83,12 +88,13 @@ class ArticleController extends Controller
             $article->title = $request->input('title');
             $article->description = $request->input('description');
             $article->content = $request->input('content');
-            $article->email = $request->input('email');
+            $article->user_id = $user->id;
             $article->category_id = $request->input('category_id');
             $article->save();
             DB::commit();
             return view('home');
         } catch (\Exception $exception) {
+            echo $exception->getMessage();
             DB::rollBack();
         }
     }

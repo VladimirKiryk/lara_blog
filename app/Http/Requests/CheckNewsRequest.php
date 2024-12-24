@@ -26,7 +26,7 @@ class CheckNewsRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:500',
             'content' => 'required|string',
-            'email' => 'required|min:6|max:100|email',
+            'user_id' => 'exists:users,id',
         ];
     }
 }

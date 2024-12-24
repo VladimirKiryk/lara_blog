@@ -14,6 +14,7 @@
             <button type="submit" class="btn btn-outline-secondary">{{$category->category_title}}</button>
         </form>
     @endforeach
+    <br>
     <a type="button" href="/home" class="w-100 btn btn-lg btn-outline-primary">На главную страницу</a>
 
 @endsection

@@ -20,6 +20,7 @@
             <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/add_news">Добавить запись</a>
             <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/destroy_news">Удалить запись</a>
             <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/category">Категории</a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/profile">Профиль</a>
         </nav>
     </div>
 </header>

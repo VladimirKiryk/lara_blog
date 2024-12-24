@@ -26,7 +26,6 @@
     <input type="text" name="title" id="title" placeholder="Напишите заголовок" class="form-control"><br>
     <input type="text" name="description" id="description" placeholder="Краткое описание" class="form-control"><br>
     <textarea type="text" name="content" id="content" placeholder="Расскажите что произошло" class="form-control"></textarea><br>
-    <input type="email" name="email" id="email" placeholder="Введите Ваш email" class="form-control"><br>
     <button type="submit" class="btn btn-outline-secondary">Отправить новость</button>
 </form>
     <a type="button" href="/home" class="w-100 btn btn-lg btn-outline-primary">На главную страницу</a>

@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->string('title');
             $table->string('description');
             $table->longText('content');
-            $table->string('email');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('published_at')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
